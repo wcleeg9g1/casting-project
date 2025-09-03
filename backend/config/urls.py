@@ -19,5 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("api/auth/", include("accounts.urls")),
+    path("api/auth/", include("accounts.urls")), # 회원가입, 로그인, 로그아웃 
+    path('api/', include('board.urls')),  # 게시판 API
 ]

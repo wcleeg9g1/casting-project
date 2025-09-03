@@ -42,6 +42,7 @@ export const AuthProvider = ({children}) => {
             setAccess(data.access);
             return data.access;
         } catch {
+            setAccess(null);
             return null;
         }
     }, []);

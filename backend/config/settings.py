@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "corsheaders", # 추가 
     "rest_framework_simplejwt.token_blacklist", # 추가 
     "accounts", # 추가 
+    "board", # 게시판 
 ]
 
 MIDDLEWARE = [
@@ -152,6 +153,8 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.IsAuthenticated",
     ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 5,  # 한 페이지에 표시할 게시글 수
 }
 
 SIMPLE_JWT = {

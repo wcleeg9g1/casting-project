@@ -47,7 +47,8 @@ class CookieTokenRefreshView(TokenRefreshView):
     def post(self, request, *args, **kwargs):
         refresh_token = request.COOKIES.get("refresh_token")
         if not refresh_token:
-            return Response({"detail": "No refresh token cookie"}, status=status.HTTP_401_UNAUTHORIZED)
+            # return Response({"detail": "No refresh token cookie"}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({"detail": "http_401: No refresh token cookie"})
         request.data["refresh"] = refresh_token
         resp = super().post(request, *args, **kwargs)
         new_refresh = resp.data.get("refresh")
