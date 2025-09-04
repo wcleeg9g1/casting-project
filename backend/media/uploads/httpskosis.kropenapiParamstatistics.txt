@@ -1,0 +1,8 @@
+https://kosis.kr/openapi/Param/statisticsParameterData.do
+
+to_centr_miryfc_wlfare_svc_list_inqire
+http://apis.data.go.kr/B554287/NationalWelfareInformations/NationalWelfarelist?serviceKey=GBzVKW8urhH58j33CzPrB5Gg9pSShx0ND3SzzqPrFEjlQRuUYXTE8qAL0DbN9Luwu/fez6LifDA5jXLpZba6EQ==&pageNo=1&numOfRows=500&srchKeyCode=003
+
+
+to_locgov_wlfare_svc_list_inqire
+https://apis.data.go.kr/B554287/LocalGovernmentWelfareInformations/LcgvWelfarelist?pageNo=1&serviceKey=GBzVKW8urhH58j33CzPrB5Gg9pSShx0ND3SzzqPrFEjlQRuUYXTE8qAL0DbN9Luwu/fez6LifDA5jXLpZba6EQ==&numOfRows=500&sggNm=%EC%98%81%EB%8F%99%EA%B5%B0

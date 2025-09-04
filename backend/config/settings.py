@@ -19,7 +19,15 @@ from dotenv import load_dotenv  # 추가
 # load_dotenv()  # .env에서 환경변수 읽기  # 추가 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
+# 프로젝트 루트 경로
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+# MEDIA설정 
+MEDIA_URL = "/media/" # 브라우저 접근 url 
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "dev-secret-key")   # 추가 
 DEBUG = os.getenv("DJANGO_DEBUG", "True").lower() in ("1", "true", "yes")  # 추가 

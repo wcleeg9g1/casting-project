@@ -16,9 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("api/auth/", include("accounts.urls")), # 회원가입, 로그인, 로그아웃 
     path('api/', include('board.urls')),  # 게시판 API
 ]
+
+# 🔹 DEBUG=True일 때만 media 파일 브라우저 접근 가능
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

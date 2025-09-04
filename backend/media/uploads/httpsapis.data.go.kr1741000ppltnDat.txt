@@ -1,0 +1,1 @@
+https://apis.data.go.kr/1741000/ppltnDataStus/selectPpltnDataStus?serviceKey=PHH6rJfbebL1zGsnwKwlnk79SDsTrZQmvIYsT7pDLOUMD%2FJ0l1Ml5Acre5kFWVyT%2BoaimDJULyXBUj94BzdzQg%3D%3D&mvinAdmmCd=1000000000&mvtAdmmCd=4812000000&srchFrYm=202506&srchToYm=202506&lv=3&type=XML&numOfRows=10000
