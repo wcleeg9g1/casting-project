@@ -10,12 +10,16 @@ export default function Board() {
     // const [page, setPage] = useState(1);
     // const [totalPages, setTotalPages] = useState(1); 
     const [pageInfo, setPageInfo] = useState({ current: 1, total: 1 });
+    const [search, setSearch] = useState(""); //검색어 상태
     const navigate = useNavigate();
 
-    const fetchPosts = async (page = 1) => {
+    const fetchPosts = async (page = 1, query="") => {
         try {
+            let url =`http://localhost:8000/api/posts/?page=${page}`; 
+            url += query? `&search=${query}`:``;
+
             // 🔹 로그인 없이 목록 조회 가능
-            const res = await fetch(`http://localhost:8000/api/posts/?page=${page}`);
+            const res = await fetch(url);
             if (res.ok) {
                 const data = await res.json();
                 setPosts(data.results); // DRF 페이징 기본 key: results
@@ -31,6 +35,9 @@ export default function Board() {
         fetchPosts(1);
     }, []);
 
+    // 검색 버튼 핸들러 
+    const handleSearch = () => { fetchPosts(1,search)}
+
     // const handlePrev = () => page > 1 && setPage(page - 1);
     // const handleNext = () => page < totalPages && setPage(page + 1);
 
@@ -38,6 +45,20 @@ export default function Board() {
         <div className="posts-container">
             <div className="board-header">
                 <h2>게시판</h2>
+                <div style={{marginLeft: "auto", display: "flex", gap: "5px"}}>
+                    <input
+                        type="text"
+                        placeholder="검색어 입력"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)} //검색 내용 입력시 
+                        onKeyDown={(e) => { //input box 엔터 
+                            if(e.key === "Enter") {
+                                handleSearch(); 
+                            }
+                        }}
+                    />
+                    <button onClick={handleSearch}>검색</button>
+                </div>
                  {access && <button onClick={() => navigate("/board/new")}>✏️ 글쓰기</button>}
             </div>
             <div className="board-list">

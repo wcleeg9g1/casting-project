@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import { fetchWithAuth } from "../auth/fetchWithAuth";
+import { downloadFile } from "../utils/downloadFile";
 
 export default function BoardDetail() {
   const { id } = useParams();
@@ -22,7 +23,7 @@ export default function BoardDetail() {
             setCurrentUser(data.username);
           }
         } catch (err) {
-        //   console.log('하하하')
+          console.log('로그아웃 상태')
         }
       })();
     }
@@ -53,17 +54,42 @@ export default function BoardDetail() {
 
   return (
     <div>
-      <h2>{post.title}</h2>
-      <p>{post.content}</p>
-      <small>작성자: {post.author_username}</small>
-     <div style={{ marginTop: "1rem" }}>
-        {isAuthor && (
-          <>
-            <Link to={`/board/${id}/edit`} style={{ marginRight: "0.5rem" }}>수정</Link>
-            <button onClick={handleDelete}>삭제</button>
-          </>
+        <h2>{post.title}</h2>
+        <p>{post.content}</p>
+        <small>작성자: {post.author_username}</small>
+        {/* 파일 목록 */}
+        {post.files && post.files.length > 0 && (
+            <div style={{ marginTop: "1rem" }}>
+                <h4>첨부파일</h4>
+                <ul>
+                    {post.files.map((file) => {
+                        const encodedName = file.file.split("/").pop(); 
+                        const decodedName = decodeURIComponent(encodedName); 
+                    
+                        return (
+                            <li key={file.id}> 
+                                <button
+                                    type="button"  // 🔹 기본 submit 방지
+                                    onClick = {() => {
+                                        downloadFile(`http://localhost:8000/api/download/${file.id}/`, decodedName)
+                                    }}
+                                >
+                                    {decodedName} {/* 파일명 표시 */}
+                                </button>
+                            </li>
+                        ); 
+                    })}
+                </ul>
+            </div>
         )}
-      </div>
+        <div style={{ marginTop: "1rem" }}>
+            {isAuthor && (
+            <>
+                <Link to={`/board/${id}/edit`} style={{ marginRight: "0.5rem" }}>수정</Link>
+                <button onClick={handleDelete}>삭제</button>
+            </>
+            )}
+        </div>
     </div>
   );
 }
